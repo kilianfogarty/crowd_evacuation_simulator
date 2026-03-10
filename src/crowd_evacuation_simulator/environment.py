@@ -8,7 +8,7 @@ class Environment:
         self.agents: list[Agent] = []
         self.exits: list[Exit] = []
 
-    def add_agents(self, agent: Agent) -> None:
+    def add_agent(self, agent: Agent) -> None:
         self.agents.append(agent)
 
     def add_exit(self, exit_obj: Exit) -> None:

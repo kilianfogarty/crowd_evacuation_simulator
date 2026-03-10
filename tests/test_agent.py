@@ -3,7 +3,7 @@ from src.crowd_evacuation_simulator.agent import Agent
 
 class TestAgent:
 
-    def test_create_agent(self):
+    def test_environment_initialization(self):
         agent: Agent = Agent([1,2])
         assert agent.speed == 1.5
         assert agent.evacuated == False
