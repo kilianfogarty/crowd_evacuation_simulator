@@ -1,2 +1,2 @@
 # crowd_evacuation_simulator
-Social-force inspired movement simulator inspired by SoftSwarm Lab
+Evacuation simulator project inspired by SoftSwarm labs. Monitors the time it takes for agents to leave a 2d room based on the number of obstacles, agents, and room size.
