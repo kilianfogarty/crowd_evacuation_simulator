@@ -1,5 +1,5 @@
-from src.crowd_evacuation_simulator.environment import Environment
-from src.crowd_evacuation_simulator.exit import Exit
+from environment import Environment
+from exit import Exit
 
 
 class Simulation:
@@ -18,7 +18,7 @@ class Simulation:
 
             agent.step_toward(exit.position, self.dt)
 
-            if exit.check_if_agent_at_exit(agent):
+            if exit.check_if_at_exit(agent):
                 agent.evacuated = True
 
         self.time += self.dt

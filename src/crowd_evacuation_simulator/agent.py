@@ -1,7 +1,7 @@
 import numpy as np
 
 class Agent:
-    def __init__(self, position: np.ndarray | list[float], speed: float = 1.5):
+    def __init__(self, position: np.ndarray | list[float], speed: float = 1.5) -> None:
         self.position: np.ndarray = np.array(position, dtype=float)
         self.speed: float = speed
         self.evacuated: bool = False

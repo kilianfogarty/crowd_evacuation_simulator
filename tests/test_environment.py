@@ -1,7 +1,7 @@
 import numpy as np
-from src.crowd_evacuation_simulator.environment import Environment
-from src.crowd_evacuation_simulator.agent import Agent
-from src.crowd_evacuation_simulator.exit import Exit
+from crowd_evacuation_simulator.environment import Environment
+from crowd_evacuation_simulator.agent import Agent
+from crowd_evacuation_simulator.exit import Exit
 
 class TestEnvironment:
 

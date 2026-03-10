@@ -1,5 +1,5 @@
 import numpy as np
-from src.crowd_evacuation_simulator.agent import Agent
+from crowd_evacuation_simulator.agent import Agent
 
 class TestAgent:
 
