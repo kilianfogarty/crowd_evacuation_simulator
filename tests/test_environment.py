@@ -9,7 +9,7 @@ class TestEnvironment:
         environment: Environment = Environment(width=30, height=40)
 
         assert environment.width == 30
-        assert environment.width == 40
+        assert environment.height == 40
         assert environment.agents == []
         assert environment.exits == []
 
@@ -24,7 +24,7 @@ class TestEnvironment:
 
     def test_add_exit(self):
         environment: Environment = Environment(width=30, height=40)
-        exit: Exit = Exit([1,2])
+        exit: Exit = Exit([1,2], radius=1)
 
         environment.add_exit(exit)
 

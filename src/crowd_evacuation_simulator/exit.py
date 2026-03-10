@@ -1,5 +1,5 @@
 import numpy as np
-from agent import Agent
+from .agent import Agent
 
 class Exit:
     def __init__(self, position: np.ndarray | list[float], radius: float) -> None:

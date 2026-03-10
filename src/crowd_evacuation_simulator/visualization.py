@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from environment import Environment
+from .environment import Environment
 
 class Visualizer:
     def __init__(self, environment: Environment) -> None:

@@ -1,6 +1,6 @@
-from environment import Environment
-from exit import Exit
-
+from .agent import Agent
+from .environment import Environment
+from .exit import Exit
 
 class Simulation:
     def __init__(self, environment: Environment, dt: float = 0.1) -> None:

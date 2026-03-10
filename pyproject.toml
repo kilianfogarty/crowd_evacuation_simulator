@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crowd_evacuation_simulator"
+version = "0.1.0"
+description = "Agent-based crowd evacuation simulator"
+authors = [{name="Kilian Fogarty"}]
+dependencies = [
+    "numpy",
+    "matplotlib",
+    "pytest"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
