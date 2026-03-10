@@ -1,5 +1,7 @@
 import numpy as np
 
+from src.crowd_evacuation_simulator.agent import Agent
+
 class Exit:
     def __init__(self, position: np.ndarray | list[float], radius: float) -> None:
         self.position: np.ndarray = np.array(position, dtype=float)

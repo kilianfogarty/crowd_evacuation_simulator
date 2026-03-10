@@ -1,7 +1,8 @@
-from numpy import np 
+import numpy as np 
 from typing import List
+
 from src.crowd_evacuation_simulator.agent import Agent
-from src.crowd_evacuation_simulator.agent import Exit
+from src.crowd_evacuation_simulator.exit import Exit
 
 class Environment:
     def __init__(self, width: float, height: float) -> None:
