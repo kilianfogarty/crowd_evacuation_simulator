@@ -8,4 +8,4 @@ class Exit:
 
     def check_if_at_exit(self, agent: Agent) -> bool:
         distance: float = np.linalg.norm(agent.position - self.position)
-        return distance <= self.radius
+        return bool(distance <= self.radius)
