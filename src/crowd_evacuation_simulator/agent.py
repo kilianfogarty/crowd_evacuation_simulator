@@ -13,6 +13,7 @@ class Agent:
         if norm == 0:
             return np.zeros(2)
         
+        # Divide by norm for unit vector
         return distance / norm
 
     def step_toward(self, target: np.ndarray, dt: float) -> None:
