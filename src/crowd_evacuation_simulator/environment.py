@@ -1,5 +1,3 @@
-import numpy as np 
-
 from src.crowd_evacuation_simulator.agent import Agent
 from src.crowd_evacuation_simulator.exit import Exit
 
