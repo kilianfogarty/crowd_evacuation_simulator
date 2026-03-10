@@ -5,7 +5,7 @@ from crowd_evacuation_simulator.exit import Exit
 
 class TestEnvironment:
 
-    def test_environment_initialization(self):
+    def test_environment_initialization(self) -> None:
         environment: Environment = Environment(width=30, height=40)
 
         assert environment.width == 30
@@ -13,7 +13,7 @@ class TestEnvironment:
         assert environment.agents == []
         assert environment.exits == []
 
-    def test_add_agent(self):
+    def test_add_agent(self) -> None:
         environment: Environment = Environment(width=30, height=40)
         agent: Agent = Agent([1,2])
 
@@ -22,7 +22,7 @@ class TestEnvironment:
         assert len(environment.agents) == 1
         assert environment.agents[0] is agent
 
-    def test_add_exit(self):
+    def test_add_exit(self) -> None:
         environment: Environment = Environment(width=30, height=40)
         exit: Exit = Exit([1,2], radius=1)
 
