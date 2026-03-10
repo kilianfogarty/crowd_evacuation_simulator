@@ -7,6 +7,6 @@ class Exit:
         self.position: np.ndarray = np.array(position, dtype=float)
         self.radius: float = radius
 
-        def check_if_agent_at_exit(self, agent: Agent) -> bool:
-            distance: float = np.linalg.norm(agent.position - self.position)
-            return distance < self.radius
+    def check_if_agent_at_exit(self, agent: Agent) -> bool:
+        distance: float = np.linalg.norm(agent.position - self.position)
+        return distance < self.radius
