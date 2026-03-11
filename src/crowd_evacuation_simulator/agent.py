@@ -1,4 +1,5 @@
 import numpy as np
+from .obstacle import Obstacle
 
 class Agent:
     def __init__(self, position: np.ndarray | list[float], speed: float = 1.5) -> None:
@@ -20,5 +21,8 @@ class Agent:
         direction: np.ndarray = self.direction_to(target)
         velocity: np.ndarray = self.speed * direction
         self.position += velocity * dt
+
+    def distance_to_obstacle(self, obstacle: Obstacle) -> float:
+        return np.linalg.norm(self.position - obstacle.position)
 
 
