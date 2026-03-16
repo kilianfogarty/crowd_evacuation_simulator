@@ -10,7 +10,6 @@ class Simulation:
 
     def step(self) -> None:
         for agent in self.environment.agents:
-
             if agent.evacuated:
                 continue
 

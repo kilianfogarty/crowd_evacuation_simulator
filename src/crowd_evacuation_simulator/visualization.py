@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from .environment import Environment
 
-class Visualizer:
+class Visualization:
     def __init__(self, environment: Environment) -> None:
         self.environment: Environment = environment
     
@@ -21,7 +21,7 @@ class Visualizer:
             )
 
         plt.xlim(0, self.environment.width)
-        plt.xlim(0, self.environment.height)
+        plt.ylim(0, self.environment.height)
 
         plt.pause(0.01)
 
