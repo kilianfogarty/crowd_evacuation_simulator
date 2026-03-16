@@ -20,8 +20,11 @@ class Visualization:
                 s=100
             )
 
+        for obstacle in self.environment.obstacles:  
+            circle = plt.Circle(obstacle.position, obstacle.radius, color='gray', fill=True)
+            plt.gca().add_patch(circle)
+
         plt.xlim(0, self.environment.width)
         plt.ylim(0, self.environment.height)
-
         plt.pause(0.01)
 

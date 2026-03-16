@@ -13,7 +13,7 @@ class Simulation:
             if agent.evacuated:
                 continue
 
-            exit: Exit = self.environment.exits[0]
+            exit: Exit = agent.nearest_exit(self.environment.exits)
 
             agent.step_toward(exit.position, self.dt)
 

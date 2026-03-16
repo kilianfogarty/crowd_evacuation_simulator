@@ -26,9 +26,9 @@ class TestSimulation:
         simulation.step()
 
         distance_before_step = np.linalg.norm(np.array([3,3]) - exit.position)
-        deistance_after_step = np.linalg.norm(agent.position - exit.position)
+        distance_after_step = np.linalg.norm(agent.position - exit.position)
 
-        assert distance_before_step > deistance_after_step
+        assert distance_before_step > distance_after_step
 
     def test_agent_evacuates_upon_reaching_exit(self):
         environment: Environment = Environment(10,10)
