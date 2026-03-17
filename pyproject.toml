@@ -8,10 +8,15 @@ version = "0.1.0"
 description = "Agent-based crowd evacuation simulator"
 authors = [{name="Kilian Fogarty"}]
 dependencies = [
-    "numpy",
-    "matplotlib",
-    "pytest"
+    "numpy>=2.0",
+    "matplotlib>=3.9",
 ]
+
+[project.optional-dependencies]
+dev = ["pytest>=9.0"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
