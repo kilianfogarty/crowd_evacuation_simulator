@@ -31,7 +31,7 @@ class Agent:
 
         Args: 
             force (np.ndarray): Net force vector acting on the agent.
-            dr (float): Timestep duration in seconds.
+            dt (float): Timestep duration in seconds.
         """
         norm: float = np.linalg.norm(force)
         if norm == 0:
@@ -71,12 +71,13 @@ class Agent:
         """
         diff: np.ndarray = self.position - other.position
         distance: np.ndarray = np.linalg.norm(diff)
-        direction: np.ndarray =  diff / distance
 
         # TODO: replace zero vector with random direction for more realistic collision.
         if distance == 0:
             return np.zeros(2)
         
+        direction: np.ndarray =  diff / distance
+    
         # Divide by distance again since the closer something is the stronger the repulsion - inverse.
         return (strength * direction) / distance
     
@@ -94,11 +95,12 @@ class Agent:
         """
         diff = self.position - obstacle.position
         distance = np.linalg.norm(diff)
-        direction: np.ndarray =  diff / distance
 
         # TODO: replace zero vector with random direction when distance is zero.
         if distance == 0 or distance > obstacle.radius + 2.0:
             return np.zeros(2)
+        
+        direction: np.ndarray =  diff / distance
 
         return (strength * direction) / distance
 
@@ -123,16 +125,16 @@ class Agent:
 
         # Left wall
         if x < threshold:
-            force[0] += strength / x
+            force[0] += strength / max(x, 1e-5)
         # Right wall
         if x > width - threshold:
-            force[0] -= strength / x
+            force[0] -= strength / max(width - x, 1e-5)
         # Bottom wall
         if y < threshold:
-            force[1] += strength / y
+            force[1] += strength / max(y, 1e-5)
         # Top wall
         if y > height - threshold:
-            force[1] -= strength / y
+            force[1] -= strength / max(height - y, 1e-5)
 
         return force
 
