@@ -7,7 +7,7 @@ class Database:
         self.connection = sqlite3.connect(path)
         self.create_tables()
 
-    def create_tables(self):
+    def create_tables(self) -> None:
         """Creates the evacuation_runs table if it does not already exist."""
         cursor = self.connection.cursor()
         cursor.execute("""
