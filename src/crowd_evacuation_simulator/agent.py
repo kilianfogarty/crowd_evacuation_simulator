@@ -57,7 +57,7 @@ class Agent:
         distances = [np.linalg.norm(self.position - exit.position) for exit in exits]
         return exits[int(np.argmin(distances))]
 
-    def repulsion_from_agent(self, other: Agent, strength: float =3.0) -> np.ndarray:
+    def repulsion_from_agent(self, other: Agent, strength: float = 3.0) -> np.ndarray:
         """Return repulsion force vector away from another agent.
         
         The magnitude is inversely proportional to distance so nearby agents push harder than farther ones.
@@ -119,7 +119,6 @@ class Agent:
         Returns:
             np.ndarray: A 2D array representing the net wall repulsion force vector.
         """
-
         force: np.ndarray = np.zeros(2)
         x, y = self.position
 

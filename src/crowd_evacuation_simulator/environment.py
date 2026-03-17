@@ -3,6 +3,7 @@ from .exit import Exit
 from .obstacle import Obstacle
 
 class Environment:
+    """Container for all agents, exits, and obstacles in the room."""
     def __init__(self, width: float, height: float) -> None:
         self.width: float = width
         self.height: float = height
