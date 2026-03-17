@@ -1,7 +1,12 @@
 import numpy as np
-from .exit import Exit
-from .obstacle import Obstacle
+from __future__ import annotations
+from typing import TYPE_CHECKING
+import numpy as np
 
+if TYPE_CHECKING:
+    from .exit import Exit
+    from .obstacle import Obstacle
+    
 class Agent:
     """Single pedestrian in the crowd evacuation simulation."""
     def __init__(self, position: np.ndarray | list[float], speed: float = 1.5) -> None:

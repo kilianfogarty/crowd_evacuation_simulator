@@ -1,5 +1,9 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
 import numpy as np
-from .agent import Agent
+
+if TYPE_CHECKING:
+    from .agent import Agent
 
 class Exit:
     """A point for agents to exit in the environment."""

@@ -1,5 +1,5 @@
+from __future__ import annotations
 import numpy as np
-from .agent import Agent 
 
 class Obstacle:
     """A static object in the environment that agents must navigate around."""

@@ -1,6 +1,10 @@
-from .agent import Agent
-from .exit import Exit
-from .obstacle import Obstacle
+from __future__ import annotations
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .agent import Agent
+    from .exit import Exit
+    from .obstacle import Obstacle
 
 class Environment:
     """Container for all agents, exits, and obstacles in the room."""

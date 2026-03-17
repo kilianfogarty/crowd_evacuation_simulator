@@ -15,7 +15,7 @@ class Simulation:
         self.environment: Environment = environment
         self.dt: float = dt
         self.time: float = 0.0
-        self.max_steps: float = max_steps
+        self.max_steps: int = max_steps
         self.steps: int = 0
 
     @property
