@@ -142,9 +142,3 @@ class TestAgent:
         force = agent.repulsion_from_wall(width=20, height=20)
         assert force[0] > 0
         assert force[1] > 0
-
-
-    
-
-    
-    

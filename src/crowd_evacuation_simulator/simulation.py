@@ -75,7 +75,3 @@ class Simulation:
         while not self.finished:
             self.step()
         return self.time if self.all_evacuated else None
-
-        
-
-
