@@ -16,13 +16,13 @@ class Database:
                 num_agents       INTEGER NOT NULL,
                 num_obstacles    INTEGER NOT NULL,
                 room_width       REAL    NOT NULL,
-                room_height      REAL,
+                room_height      REAL    NOT NULL,
                 seed             INTEGER NOT NULL,
                 evacuation_time  REAL,
                 all_evacuated    INTEGER NOT NULL
             )
         """)
-        self.connect.commit()
+        self.connection.commit()
 
     def write_simulation_run(
             self,
@@ -48,7 +48,7 @@ class Database:
         """
         cursor = self.connection.cursor()
         cursor.execute(
-            """INERST INTO evacuation_runs
+            """INSERT INTO evacuation_runs
                 (num_agents, num_obstacles, room_width, room_height, seed, evacuation_time, all_evacuated)
             VALUES (?, ?, ?, ?, ?, ?, ?)
             """,
@@ -66,7 +66,7 @@ class Database:
 
         cursor = self.connection.cursor()
         cursor.execute("SELECT * FROM evacuation_runs")
-        rows = cursor.fetchall
+        rows = cursor.fetchall()
         headers = [description[0] for description in cursor.description]
         with open(path, "w", newline="") as f:
             writer = csv.writer(f)
