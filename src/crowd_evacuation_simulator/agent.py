@@ -1,4 +1,3 @@
-import numpy as np
 from __future__ import annotations
 from typing import TYPE_CHECKING
 import numpy as np
@@ -6,7 +5,7 @@ import numpy as np
 if TYPE_CHECKING:
     from .exit import Exit
     from .obstacle import Obstacle
-    
+
 class Agent:
     """Single pedestrian in the crowd evacuation simulation."""
     def __init__(self, position: np.ndarray | list[float], speed: float = 1.5) -> None:
@@ -26,7 +25,7 @@ class Agent:
             np.ndarray: A 2D unit vector or a zero vector if the distance to target is zero.
         """
         diff: np.ndarray = target - self.position
-        norm: float = np.linalg.norm(diff)
+        norm: float = float(np.linalg.norm(diff))
         if norm == 0:
             return np.zeros(2)
         return diff / norm
@@ -38,7 +37,7 @@ class Agent:
             force (np.ndarray): Net force vector acting on the agent.
             dt (float): Timestep duration in seconds.
         """
-        norm: float = np.linalg.norm(force)
+        norm: float = float(np.linalg.norm(force))
         if norm == 0:
             return
         # Direction is a unit vector. Magnitude is controlled by agent speed field.
@@ -75,7 +74,7 @@ class Agent:
             np.ndarray: A 2D array representing the repulsion force vector pointing away from the other agent.
         """
         diff: np.ndarray = self.position - other.position
-        distance: np.ndarray = np.linalg.norm(diff)
+        distance: float = float(np.linalg.norm(diff))
 
         # TODO: replace zero vector with random direction for more realistic collision.
         if distance == 0:

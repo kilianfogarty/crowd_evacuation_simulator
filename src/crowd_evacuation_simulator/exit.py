@@ -13,5 +13,5 @@ class Exit:
 
     def check_if_at_exit(self, agent: Agent) -> bool:
         """Return True if agent is within or on the exit radius."""
-        distance: float = np.linalg.norm(agent.position - self.position)
+        distance: float = float(np.linalg.norm(agent.position - self.position))
         return bool(distance <= self.radius)
