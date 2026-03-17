@@ -2,10 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import random
 
-from .environment import Environment
-from .agent import Agent
-from .exit import Exit
-from .simulation import Simulation
+from .src.crowd_evacuation_simulator.environment import Environment
+from .src.crowd_evacuation_simulator.agent import Agent
+from .src.crowd_evacuation_simulator.exit import Exit
+from .src.crowd_evacuation_simulator.simulation import Simulation
 from .visualization import Visualization
 
 environment: Environment = Environment(width=20, height=20)

@@ -25,9 +25,6 @@ class Agent:
         velocity: np.ndarray = self.speed * direction
         self.position += velocity * dt
 
-    def distance_to_obstacle(self, obstacle: Obstacle) -> float:
-        return np.linalg.norm(self.position - obstacle.position)
-    
     def repulsion_from_agent(self, other: Agent, strength: float =3.0):
         diff = self.position - other.position
         distance = np.linalg.norm(diff)
@@ -51,6 +48,10 @@ class Agent:
             raise ValueError("No exits in provided list from environment")
         distances = [np.linalg.norm(self.position - e.position) for e in exits]
         return exits[np.argmin(distances)]
+
+    def repulsion_from_wall() -> None:
+        pass
+
 
 
 
