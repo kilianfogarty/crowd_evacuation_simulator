@@ -1,9 +1,9 @@
 import numpy as np
 import pytest
-from crowd_evacuation_simulator.agent import Agent
-from crowd_evacuation_simulator.environment import Environment
-from crowd_evacuation_simulator.exit import Exit
-from crowd_evacuation_simulator.simulation import Simulation
+from crowd_evacuation_simulator import Agent
+from crowd_evacuation_simulator import Environment
+from crowd_evacuation_simulator import Exit
+from crowd_evacuation_simulator import Simulation
 
 class TestSimulation:
 

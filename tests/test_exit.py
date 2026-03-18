@@ -1,6 +1,6 @@
 import numpy as np
-from crowd_evacuation_simulator.exit import Exit
-from crowd_evacuation_simulator.agent import Agent
+from crowd_evacuation_simulator import Exit
+from crowd_evacuation_simulator import Agent
 
 class TestExit:
     

@@ -1,7 +1,7 @@
 import numpy as np
-from crowd_evacuation_simulator.agent import Agent
-from crowd_evacuation_simulator.environment import Environment
-from crowd_evacuation_simulator.obstacle import Obstacle
+from crowd_evacuation_simulator import Agent
+from crowd_evacuation_simulator import Environment
+from crowd_evacuation_simulator import Obstacle
 
 class TestObstacle:
 

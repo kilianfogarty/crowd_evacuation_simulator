@@ -1,8 +1,8 @@
 import numpy as np
 import pytest
-from crowd_evacuation_simulator.agent import Agent
-from crowd_evacuation_simulator.exit import Exit
-from crowd_evacuation_simulator.obstacle import Obstacle
+from crowd_evacuation_simulator import Agent
+from crowd_evacuation_simulator import Exit
+from crowd_evacuation_simulator import Obstacle
 
 class TestAgent:
 

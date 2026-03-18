@@ -1,8 +1,7 @@
 import csv
 import os
 import tempfile
-import pytest
-from crowd_evacuation_simulator.database import Database
+from crowd_evacuation_simulator import Database
 
 class TestDatabase:
     
