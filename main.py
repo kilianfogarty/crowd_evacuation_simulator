@@ -9,7 +9,7 @@ Usage examples:
 from __future__ import annotations
 import argparse
 import numpy as np
-from crowd_evacuation_simulator import Agent, Database, Environment, Exit, Obstacle, Simulation
+from crowd_evacuation_simulator import Agent, Database, Environment, EnvironmentFactory, Exit, Obstacle, Simulation
 
 def parse_args() -> argparse.Namespace:
     parser: argparse.ArgumentParser = argparse.ArgumentParser(
@@ -24,48 +24,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-steps", type=int, default=2000, help="Max timesteps before quitting (default: 2000)")
     return parser.parse_args()
 
-def build_environment(
-        width: float,
-        height: float,
-        num_agents: int,
-        num_obstacles: int,
-        seed: int 
-    ) -> Environment:
-    """Build and populate an environment with provided agents, obstacles, and exits.
-    
-    Args:
-        width (float): Room width in simulation units.
-        height (float): Room height in simulation units.
-        num_agents (int): Number of agents to place.
-        num_obstacles (int): Number of obstacles to place.
-        seed (int): Random seed for reproducible placement
-
-    Returns:
-        Environment: A populated environment ready to simulate.
-    """
-    rng: np.random.Generator = np.random.default_rng(seed)
-    env: Environment = Environment(width, height)
-
-    env.add_exit(Exit([width - 2.0, height / 2.0], radius=1.0))
-
-    margin = 0.1
-    x_min, y_min = width * margin, height * margin
-    x_max, y_max = width * (1 - margin), height * (1 - margin)
-
-    for _ in range(num_agents):
-        position = rng.uniform([x_min, y_min], [x_max, y_max])
-        env.add_agent(Agent(position))
-
-    for _ in range(num_obstacles):
-        position = rng.uniform([x_min, y_min], [x_max, y_max])
-        env.add_obstacle(Obstacle(position, radius=0.8))
-
-    return env
-
 def main() -> None:
     args = parse_args()
 
-    env = build_environment(
+    env = EnvironmentFactory.build_environment(
         width=args.width,
         height=args.height,
         num_agents=args.agents,
