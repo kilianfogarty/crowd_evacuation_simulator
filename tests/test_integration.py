@@ -10,6 +10,7 @@ import os
 import tempfile
 
 import numpy as np
+
 from crowd_evacuation_simulator import (
     Database,
     Environment,

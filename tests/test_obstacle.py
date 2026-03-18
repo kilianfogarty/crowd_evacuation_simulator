@@ -1,4 +1,5 @@
 import numpy as np
+
 from crowd_evacuation_simulator import Obstacle
 
 
