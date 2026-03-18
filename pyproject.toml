@@ -10,20 +10,41 @@ authors = [{name="Kilian Fogarty"}]
 requires-python = ">=3.11"
 dependencies = [
     "numpy>=2.0",
-    "matplotlib>=3.9",
-    "scipy>=1.13"
+    "matplotlib>=3.9"
 ]
 
 [project.optional-dependencies]
 dev = ["pytest>=9.0",
-       "pytest-cov",
+       "pytest-cov>=5.0",
        "mypy>=1.10",
        "ruff>=0.4",
        "pre-commit"
 ]
+
+[project.scripts]
+simulate = "main:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 80
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]
+
+[tool.mypy]
+strict = false
+ignore_missing_imports = true
+
+[tool.coverage.run]
+source = ["src/crowd_evacuation_simulator"]
+omit = ["tests/*"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 80
