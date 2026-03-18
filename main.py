@@ -12,7 +12,7 @@ import numpy as np
 from crowd_evacuation_simulator import Agent, Database, Environment, Exit, Obstacle, Simulation
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description="A single run of a crowd evacuation simulation."
     )
     parser.add_argument("--agents", type=int, default=30, help="Number of agents (default: 30)")
