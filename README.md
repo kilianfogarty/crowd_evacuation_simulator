@@ -8,3 +8,5 @@ Evacuation simulator project inspired by SoftSwarm labs. Monitors the time it ta
 4. Improve speed for large amounts of agents
 5. MyPy, Ruff, Pre-Commit, Pytest, PyTest coverage... maybe hypothesis
 6. C extension so that the simulation.step() function runs quicker?
+7. Do not hardcode margins
+8. Use conftest for fixtures.
