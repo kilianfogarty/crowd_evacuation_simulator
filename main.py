@@ -48,12 +48,16 @@ def build_environment(
 
     env.add_exit(Exit([width - 2.0, height / 2.0], radius=1.0))
 
+    margin = 0.1
+    x_min, y_min = width * margin, height * margin
+    x_max, y_max = width * (1 - margin), height * (1 - margin)
+
     for _ in range(num_agents):
-        position = rng.uniform([1.0, 1.0], [width - 5.0, height - 1.0])
+        position = rng.uniform([x_min, y_min], [x_max, y_max])
         env.add_agent(Agent(position))
 
     for _ in range(num_obstacles):
-        position = rng.uniform([2.0, 2.0], [width - 4.0, height - 2.0])
+        position = rng.uniform([x_min, y_min], [x_max, y_max])
         env.add_obstacle(Obstacle(position, radius=0.8))
 
     return env
