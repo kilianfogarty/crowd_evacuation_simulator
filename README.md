@@ -10,3 +10,4 @@ Evacuation simulator project inspired by SoftSwarm labs. Monitors the time it ta
 6. C extension so that the simulation.step() function runs quicker?
 7. Do not hardcode margins
 8. Use conftest for fixtures.
+9. Experiment.py file that runs multiple simulations with random variables.
