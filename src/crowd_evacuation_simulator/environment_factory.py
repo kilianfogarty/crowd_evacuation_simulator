@@ -1,17 +1,17 @@
 from __future__ import annotations
-from typing import TYPE_CHECKING
 import numpy as np
-
-if TYPE_CHECKING:
-    from .agent import Agent
-    from .exit import Exit
-    from .environment import Environment
-    from .obstacle import Obstacle
+from .agent import Agent
+from .exit import Exit
+from .environment import Environment
+from .obstacle import Obstacle
 
 MARGIN = 0.1
 
 class EnvironmentFactory:
+    """Constructs populated environments for simulations."""
+    
     def build_environment(
+        self,
         width: float,
         height: float,
         num_agents: int,
