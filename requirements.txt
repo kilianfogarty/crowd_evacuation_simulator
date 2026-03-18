@@ -1,6 +1,11 @@
 #Runtime
 numpy >= 2.0
 matplotlib >= 3.9
+scipy>=1.13
 
 #Dev
-pytest >= 9.0
+pytest>=9.0
+pytest-cov
+mypy>=1.10
+ruff>=0.4
+pre-commit
