@@ -1,9 +1,11 @@
 import csv
 import sqlite3
+import os
 
 class Database:
     """Handles persistence of simulation run results to SQLite database."""
-    def __init__(self, path: str = "simulation.db") -> None:
+    def __init__(self, path: str = "results/simulation.db") -> None:
+        os.makedirs(os.path.dirname(path), exist_ok=True)
         self.connection = sqlite3.connect(path)
         self.create_tables()
 
@@ -24,7 +26,7 @@ class Database:
         """)
         self.connection.commit()
 
-    def write_simulation_run(
+    def write_run(
             self,
             num_agents: int,
             num_obstacles: int,
