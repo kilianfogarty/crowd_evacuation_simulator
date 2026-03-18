@@ -1,7 +1,11 @@
+from __future__ import annotations
+
 import numpy as np
 from .agent import Agent
 from .environment import Environment
 from .exit import Exit
+
+INTERACTION_RADIUS = 5.0
 
 class Simulation:
     """Runs the evacuation simulation using the social force model.
@@ -48,7 +52,9 @@ class Simulation:
             # Agent repulsion
             for other in active:
                 if other is not agent:
-                    force += agent.repulsion_from_agent(other)
+                    diff: np.ndarray = agent.position - other.position
+                    if abs(float(np.linalg.norm(diff))) < INTERACTION_RADIUS:
+                        force += agent.repulsion_from_agent(other)
             
             # Object repulsion
             for obstacle in env.obstacles:
