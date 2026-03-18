@@ -29,13 +29,13 @@ class TestDatabase:
         finally:
             os.unlink(path)
 
-    # write_simulation_run
-    def test_write_simulation_run_inserts_one_row(self) -> None:
+    # write_run
+    def test_write_run_inserts_one_row(self) -> None:
         with tempfile.NamedTemporaryFile(suffix=".db", delete=False) as f:
             path = f.name
         try:
             db = Database(path)
-            db.write_simulation_run(30, 2, 20.0, 20.0, 0, 45.3, True)
+            db.write_run(30, 2, 20.0, 20.0, 0, 45.3, True)
             cursor = db.connection.cursor()
             cursor.execute("SELECT COUNT(*) FROM evacuation_runs")
             assert cursor.fetchone()[0] == 1
@@ -43,12 +43,12 @@ class TestDatabase:
         finally:
             os.unlink(path)
 
-    def test_write_simulation_run_stores_correct_values(self) -> None:
+    def test_write_run_stores_correct_values(self) -> None:
         with tempfile.NamedTemporaryFile(suffix=".db", delete=False) as f:
             path = f.name
         try:
             db = Database(path)
-            db.write_simulation_run(10, 0, 20.0, 20.0, 1, 22.1, True)
+            db.write_run(10, 0, 20.0, 20.0, 1, 22.1, True)
             cursor = db.connection.cursor()
             cursor.execute("SELECT num_agents, num_obstacles, seed, evacuation_time, all_evacuated FROM evacuation_runs")
             row = cursor.fetchone()
@@ -61,12 +61,12 @@ class TestDatabase:
         finally:
             os.unlink(path)
 
-    def test_write_simulation_run_bool_stored_as_integer(self) -> None:
+    def test_write_run_bool_stored_as_integer(self) -> None:
         with tempfile.NamedTemporaryFile(suffix=".db", delete=False) as f:
             path = f.name
         try:
             db = Database(path)
-            db.write_simulation_run(30, 0, 20.0, 20.0, 0, 40.0, True)
+            db.write_run(30, 0, 20.0, 20.0, 0, 40.0, True)
             cursor = db.connection.cursor()
             cursor.execute("SELECT all_evacuated FROM evacuation_runs")
             value = cursor.fetchone()[0]
@@ -76,12 +76,12 @@ class TestDatabase:
         finally:
             os.unlink(path)
 
-    def test_write_simulation_run_none_evacuation_time(self) -> None:
+    def test_write_run_none_evacuation_time(self) -> None:
         with tempfile.NamedTemporaryFile(suffix=".db", delete=False) as f:
             path = f.name
         try:
             db = Database(path)
-            db.write_simulation_run(100, 5, 20.0, 20.0, 2, None, False)
+            db.write_run(100, 5, 20.0, 20.0, 2, None, False)
             cursor = db.connection.cursor()
             cursor.execute("SELECT evacuation_time, all_evacuated FROM evacuation_runs")
             row = cursor.fetchone()
@@ -91,14 +91,14 @@ class TestDatabase:
         finally:
             os.unlink(path)
 
-    def test_write_simulation_run_multiple_rows(self) -> None:
+    def test_write_run_multiple_rows(self) -> None:
         with tempfile.NamedTemporaryFile(suffix=".db", delete=False) as f:
             path = f.name
         try:
             db = Database(path)
-            db.write_simulation_run(10, 0, 20.0, 20.0, 0, 30.0, True)
-            db.write_simulation_run(30, 2, 20.0, 20.0, 1, 55.0, True)
-            db.write_simulation_run(50, 5, 20.0, 20.0, 2, None, False)
+            db.write_run(10, 0, 20.0, 20.0, 0, 30.0, True)
+            db.write_run(30, 2, 20.0, 20.0, 1, 55.0, True)
+            db.write_run(50, 5, 20.0, 20.0, 2, None, False)
             cursor = db.connection.cursor()
             cursor.execute("SELECT COUNT(*) FROM evacuation_runs")
             assert cursor.fetchone()[0] == 3
@@ -110,7 +110,7 @@ class TestDatabase:
     def test_export_csv_creates_file(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             db = Database(os.path.join(tmpdir, "test.db"))
-            db.write_simulation_run(30, 0, 20.0, 20.0, 0, 40.0, True)
+            db.write_run(30, 0, 20.0, 20.0, 0, 40.0, True)
             csv_path = os.path.join(tmpdir, "results.csv")
             db.export_csv(csv_path)
             assert os.path.exists(csv_path)
@@ -119,8 +119,8 @@ class TestDatabase:
     def test_export_csv_correct_row_count(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             db = Database(os.path.join(tmpdir, "test.db"))
-            db.write_simulation_run(30, 0, 20.0, 20.0, 0, 40.0, True)
-            db.write_simulation_run(30, 2, 20.0, 20.0, 1, 55.0, True)
+            db.write_run(30, 0, 20.0, 20.0, 0, 40.0, True)
+            db.write_run(30, 2, 20.0, 20.0, 1, 55.0, True)
             csv_path = os.path.join(tmpdir, "results.csv")
             db.export_csv(csv_path)
             with open(csv_path) as f:
@@ -131,7 +131,7 @@ class TestDatabase:
     def test_export_csv_has_correct_headers(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             db = Database(os.path.join(tmpdir, "test.db"))
-            db.write_simulation_run(30, 0, 20.0, 20.0, 0, 40.0, True)
+            db.write_run(30, 0, 20.0, 20.0, 0, 40.0, True)
             csv_path = os.path.join(tmpdir, "results.csv")
             db.export_csv(csv_path)
             with open(csv_path) as f:
