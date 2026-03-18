@@ -13,8 +13,9 @@ class TestDatabase:
         try:
             db = Database(path)
             assert db.connection is not None
-            db.close()
         finally:
+            if db is not None:
+                db.close()
             os.unlink(path)
 
     def test_initialization_creates_table(self) -> None:
@@ -25,8 +26,9 @@ class TestDatabase:
             cursor = db.connection.cursor()
             cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='evacuation_runs'")
             assert cursor.fetchone() is not None
-            db.close()
         finally:
+            if db is not None:
+                db.close()
             os.unlink(path)
 
     # write_run
@@ -39,8 +41,9 @@ class TestDatabase:
             cursor = db.connection.cursor()
             cursor.execute("SELECT COUNT(*) FROM evacuation_runs")
             assert cursor.fetchone()[0] == 1
-            db.close()
         finally:
+            if db is not None:
+                db.close()
             os.unlink(path)
 
     def test_write_run_stores_correct_values(self) -> None:
@@ -57,8 +60,9 @@ class TestDatabase:
             assert row[2] == 1
             assert abs(row[3] - 22.1) < 0.001
             assert row[4] == 1
-            db.close()
         finally:
+            if db is not None:
+                db.close()
             os.unlink(path)
 
     def test_write_run_bool_stored_as_integer(self) -> None:
@@ -72,8 +76,9 @@ class TestDatabase:
             value = cursor.fetchone()[0]
             assert isinstance(value, int)
             assert value == 1
-            db.close()
         finally:
+            if db is not None:
+                db.close()
             os.unlink(path)
 
     def test_write_run_none_evacuation_time(self) -> None:
@@ -87,8 +92,9 @@ class TestDatabase:
             row = cursor.fetchone()
             assert row[0] is None
             assert row[1] == 0
-            db.close()
         finally:
+            if db is not None:
+                db.close()
             os.unlink(path)
 
     def test_write_run_multiple_rows(self) -> None:
@@ -102,8 +108,9 @@ class TestDatabase:
             cursor = db.connection.cursor()
             cursor.execute("SELECT COUNT(*) FROM evacuation_runs")
             assert cursor.fetchone()[0] == 3
-            db.close()
         finally:
+            if db is not None:
+                db.close()
             os.unlink(path)
 
     # export csv
