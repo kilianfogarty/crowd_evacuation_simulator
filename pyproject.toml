@@ -7,6 +7,7 @@ name = "crowd_evacuation_simulator"
 version = "0.1.0"
 description = "Agent-based crowd evacuation simulator"
 authors = [{name="Kilian Fogarty"}]
+requires-python = ">=3.11"
 dependencies = [
     "numpy>=2.0",
     "matplotlib>=3.9",
@@ -14,7 +15,12 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=9.0"]
+dev = ["pytest>=9.0",
+       "pytest-cov",
+       "mypy>=1.10",
+       "ruff>=0.4",
+       "pre-commit"
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]
