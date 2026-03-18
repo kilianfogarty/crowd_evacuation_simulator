@@ -86,9 +86,11 @@ class Agent:
         diff: np.ndarray = self.position - other.position
         distance: float = float(np.linalg.norm(diff))
 
-        # TODO: replace zero vector with random direction for more realistic collision.
-        if distance == 0:
-            return np.zeros(2)
+        if np.allclose(distance, 0):
+            angle: float = np.random.uniform(
+                0, 2 * np.pi
+            )  # angle can be from 0 -> 2pi
+            return np.array([np.cos(angle), np.sin(angle)])
 
         direction: np.ndarray = diff / distance
 
@@ -112,8 +114,13 @@ class Agent:
         diff = self.position - obstacle.position
         distance = np.linalg.norm(diff)
 
-        # TODO: replace zero vector with random direction when distance is zero.
-        if distance == 0 or distance > obstacle.radius + 2.0:
+        if np.allclose(distance, 0):
+            angle: float = np.random.uniform(
+                0, 2 * np.pi
+            )  # angle can be from 0 -> 2pi
+            return np.array([np.cos(angle), np.sin(angle)])
+
+        if distance > obstacle.radius + 2.0:
             return np.zeros(2)
 
         direction: np.ndarray = diff / distance

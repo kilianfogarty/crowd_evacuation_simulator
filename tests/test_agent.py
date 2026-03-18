@@ -82,10 +82,10 @@ class TestAgent:
         force = agent.repulsion_from_agent(other)
         assert force[0] > 0
 
-    def test_repulsion_from_agent_zero_distance_returns_zero(self) -> None:
+    def test_repulsion_from_agent_zero_distance_returns_not_zero(self) -> None:
         agent = Agent([1, 1])
         other = Agent([1, 1])
-        assert np.allclose(agent.repulsion_from_agent(other), np.zeros(2))
+        assert not np.allclose(agent.repulsion_from_agent(other), np.zeros(2))
 
     def test_repulsion_from_agent_stronger_when_closer(self) -> None:
         agent = Agent([0, 0])
