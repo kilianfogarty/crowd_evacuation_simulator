@@ -42,8 +42,8 @@ class Simulation:
 
         for agent in active:
             # Exit attraction
-            exit: Exit = agent.nearest_exit(env.exits)
-            force: np.ndarray = agent.direction_to(exit.position)
+            exit_obj: Exit = agent.nearest_exit(env.exits)
+            force: np.ndarray = agent.direction_to(exit_obj.position)
 
             # Agent repulsion
             for other in active:
@@ -59,7 +59,7 @@ class Simulation:
 
             agent.apply_force(force, self.dt)
 
-            if exit.check_if_at_exit(agent):
+            if exit_obj.check_if_at_exit(agent):
                 agent.evacuated = True
         
         self.time += self.dt
