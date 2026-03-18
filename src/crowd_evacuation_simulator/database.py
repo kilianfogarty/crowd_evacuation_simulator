@@ -1,9 +1,11 @@
 import csv
-import sqlite3
 import os
+import sqlite3
+
 
 class Database:
     """Handles persistence of simulation run results to SQLite database."""
+
     def __init__(self, path: str = "results/simulation.db") -> None:
         os.makedirs(os.path.dirname(path), exist_ok=True)
         self.connection = sqlite3.connect(path)
@@ -27,24 +29,24 @@ class Database:
         self.connection.commit()
 
     def write_run(
-            self,
-            num_agents: int,
-            num_obstacles: int,
-            room_width: float,
-            room_height: float,
-            seed: int,
-            evacuation_time: float | None,
-            all_evacuated: bool,
-        ) -> None:
+        self,
+        num_agents: int,
+        num_obstacles: int,
+        room_width: float,
+        room_height: float,
+        seed: int,
+        evacuation_time: float | None,
+        all_evacuated: bool,
+    ) -> None:
         """Insert one simulation run into the database.
-            
+
         Args:
             num_agents (int): Number of agents in the run.
             num_obstacles (int): Number of obstacles in the run.
             room_width (float): Width of the environment.
             room_height (float): Height of the environment.
             seed (int): Random seed used for this run.
-            evacuation_time (float | None): Time for all agents to evacuate, 
+            evacuation_time (float | None): Time for all agents to evacuate,
             or None if max_steps was reached before full evacuation.
             all_evacuated (bool): Whether all agents evacuated successfully.
         """
@@ -54,8 +56,15 @@ class Database:
                 (num_agents, num_obstacles, room_width, room_height, seed, evacuation_time, all_evacuated)
             VALUES (?, ?, ?, ?, ?, ?, ?)
             """,
-            (num_agents, num_obstacles, room_width, room_height, seed,
-             evacuation_time, int(all_evacuated)),
+            (
+                num_agents,
+                num_obstacles,
+                room_width,
+                room_height,
+                seed,
+                evacuation_time,
+                int(all_evacuated),
+            ),
         )
         self.connection.commit()
 
@@ -77,5 +86,4 @@ class Database:
 
     def close(self) -> None:
         """Close the database connection."""
-        self.connection.close()     
-            
+        self.connection.close()

@@ -1,21 +1,27 @@
 from __future__ import annotations
+
 from typing import TYPE_CHECKING
+
 import numpy as np
 
 if TYPE_CHECKING:
     from .exit import Exit
     from .obstacle import Obstacle
 
+
 class Agent:
     """Single pedestrian in the crowd evacuation simulation."""
-    def __init__(self, position: np.ndarray | list[float], speed: float = 1.5) -> None:
+
+    def __init__(
+        self, position: np.ndarray | list[float], speed: float = 1.5
+    ) -> None:
         self.position: np.ndarray = np.array(position, dtype=float)
         self.speed: float = speed
         self.evacuated: bool = False
 
     def direction_to(self, target: np.ndarray) -> np.ndarray:
         """Return unit vector from agent position to go towards target
-        
+
         Returns a zero vector if the agent is already at the target.
 
         Args:
@@ -33,7 +39,7 @@ class Agent:
     def apply_force(self, force: np.ndarray, dt: float) -> None:
         """Move the agent one timestep in the direction of the net force applied on it.
 
-        Args: 
+        Args:
             force (np.ndarray): Net force vector acting on the agent.
             dt (float): Timestep duration in seconds.
         """
@@ -46,7 +52,7 @@ class Agent:
 
     def nearest_exit(self, exits: list[Exit]) -> Exit:
         """Return the closest exit based on Euclidean distance.
-        
+
         Args:
             exits (list[Exit]): List of exits from an environment field.
 
@@ -58,12 +64,16 @@ class Agent:
         """
         if not exits:
             raise ValueError("No exits in provided list from environment")
-        distances = [np.linalg.norm(self.position - exit.position) for exit in exits]
+        distances = [
+            np.linalg.norm(self.position - exit.position) for exit in exits
+        ]
         return exits[int(np.argmin(distances))]
 
-    def repulsion_from_agent(self, other: Agent, strength: float = 1.5) -> np.ndarray:
+    def repulsion_from_agent(
+        self, other: Agent, strength: float = 1.5
+    ) -> np.ndarray:
         """Return repulsion force vector away from another agent.
-        
+
         The magnitude is inversely proportional to distance so nearby agents push harder than farther ones.
 
         Args:
@@ -79,15 +89,17 @@ class Agent:
         # TODO: replace zero vector with random direction for more realistic collision.
         if distance == 0:
             return np.zeros(2)
-        
-        direction: np.ndarray =  diff / distance
-    
+
+        direction: np.ndarray = diff / distance
+
         # Divide by distance again since the closer something is the stronger the repulsion - inverse.
         return (strength * direction) / distance
-    
-    def repulsion_from_obstacle(self, obstacle: Obstacle, strength: float = 1.5) -> np.ndarray:
+
+    def repulsion_from_obstacle(
+        self, obstacle: Obstacle, strength: float = 1.5
+    ) -> np.ndarray:
         """Return repulsion force vector away from an obstacle.
-        
+
         Returns a zero vector if the agent is beyond the obstacle radius + 2.0 units.
 
         Args:
@@ -103,12 +115,18 @@ class Agent:
         # TODO: replace zero vector with random direction when distance is zero.
         if distance == 0 or distance > obstacle.radius + 2.0:
             return np.zeros(2)
-        
-        direction: np.ndarray =  diff / distance
+
+        direction: np.ndarray = diff / distance
 
         return (strength * direction) / distance
 
-    def repulsion_from_wall(self, width: float, height: float, strength: float = 2.0, threshold: float = 1.0) -> np.ndarray:
+    def repulsion_from_wall(
+        self,
+        width: float,
+        height: float,
+        strength: float = 2.0,
+        threshold: float = 1.0,
+    ) -> np.ndarray:
         """Return repulsion force pushing the agent away from room boundaries.
 
         Each wall contributes an inward force when the agent is within
@@ -140,12 +158,3 @@ class Agent:
             force[1] -= strength / max(height - y, 1e-5)
 
         return force
-
-
-
-        
-
-
-
-
-

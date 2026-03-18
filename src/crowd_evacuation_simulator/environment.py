@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -6,8 +7,10 @@ if TYPE_CHECKING:
     from .exit import Exit
     from .obstacle import Obstacle
 
+
 class Environment:
     """Container for all agents, exits, and obstacles in the room."""
+
     def __init__(self, width: float, height: float) -> None:
         self.width: float = width
         self.height: float = height

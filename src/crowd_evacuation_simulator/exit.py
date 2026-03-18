@@ -1,13 +1,19 @@
 from __future__ import annotations
+
 from typing import TYPE_CHECKING
+
 import numpy as np
 
 if TYPE_CHECKING:
     from .agent import Agent
 
+
 class Exit:
     """A point for agents to exit in the environment."""
-    def __init__(self, position: np.ndarray | list[float], radius: float) -> None:
+
+    def __init__(
+        self, position: np.ndarray | list[float], radius: float
+    ) -> None:
         self.position: np.ndarray = np.array(position, dtype=float)
         self.radius: float = radius
 

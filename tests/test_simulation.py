@@ -1,15 +1,11 @@
 import numpy as np
-import pytest
-from crowd_evacuation_simulator import Agent
-from crowd_evacuation_simulator import Environment
-from crowd_evacuation_simulator import Exit
-from crowd_evacuation_simulator import Simulation
+from crowd_evacuation_simulator import Agent, Environment, Exit, Simulation
+
 
 class TestSimulation:
-
     # init
     def test_simulation_default_initialization(self) -> None:
-        environment: Environment = Environment(10,10)
+        environment: Environment = Environment(10, 10)
         simulation: Simulation = Simulation(environment)
         assert simulation.environment is environment
         assert np.allclose(simulation.dt, 0.1)
@@ -18,7 +14,7 @@ class TestSimulation:
         assert simulation.steps == 0
 
     def test_simulation_custom_initialization(self) -> None:
-        environment: Environment = Environment(10,10)
+        environment: Environment = Environment(10, 10)
         simulation: Simulation = Simulation(environment, dt=1.0, max_steps=1000)
         assert simulation.environment is environment
         assert np.allclose(simulation.dt, 1.0)
@@ -46,8 +42,8 @@ class TestSimulation:
     def test_all_evacuated_false_when_some_agents_remaining(self) -> None:
         env = Environment(10, 10)
         env.add_exit(Exit([0, 0], radius=0.5))
-        env.add_agent(Agent([0, 0]))    # at exit
-        env.add_agent(Agent([9, 9]))    # far from exit
+        env.add_agent(Agent([0, 0]))  # at exit
+        env.add_agent(Agent([9, 9]))  # far from exit
         sim = Simulation(env)
         sim.step()
         assert sim.all_evacuated is False
@@ -165,7 +161,3 @@ class TestSimulation:
         sim = Simulation(env)
         sim.run()
         assert sim.all_evacuated is True
-
-
-    
-

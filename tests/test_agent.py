@@ -1,26 +1,24 @@
 import numpy as np
 import pytest
-from crowd_evacuation_simulator import Agent
-from crowd_evacuation_simulator import Exit
-from crowd_evacuation_simulator import Obstacle
+from crowd_evacuation_simulator import Agent, Exit, Obstacle
+
 
 class TestAgent:
-
     # init
     def test_agent_default_initialization(self) -> None:
-        agent: Agent = Agent([1,2])
+        agent: Agent = Agent([1, 2])
         assert agent.speed == 1.5
-        assert agent.evacuated == False
+        assert not agent.evacuated
 
     def test_agent_custom_speed_initialization(self) -> None:
-        agent: Agent = Agent([1,2], speed = 2.0)
+        agent: Agent = Agent([1, 2], speed=2.0)
         assert agent.speed == 2.0
-        assert agent.evacuated == False
-    
+        assert not agent.evacuated
+
     # direction_to
     def test_direction_to_new_position(self) -> None:
-        agent: Agent = Agent([0,0])
-        target = np.array([3,4])
+        agent: Agent = Agent([0, 0])
+        target = np.array([3, 4])
         direction: np.ndarray = agent.direction_to(target)
         expected: np.ndarray = np.array([0.6, 0.8])
 
@@ -28,8 +26,8 @@ class TestAgent:
         assert np.allclose(direction, expected)
 
     def test_direction_to_same_position_returns_zero(self) -> None:
-        agent: Agent = Agent([1,1])
-        target = np.array([1,1])
+        agent: Agent = Agent([1, 1])
+        target = np.array([1, 1])
         direction: np.ndarray = agent.direction_to(target)
         expected: np.ndarray = np.zeros(2)
 
@@ -63,11 +61,12 @@ class TestAgent:
 
     def test_nearest_exit_multiple_exit(self) -> None:
         agent = Agent([0, 0])
-        exits = [Exit([5, 5], radius=1.0),
-                 Exit([2, 2], radius=1.0),
-                 Exit([10, 5], radius=1.0),
-                 Exit([15, 8], radius=1.0)
-                ]
+        exits = [
+            Exit([5, 5], radius=1.0),
+            Exit([2, 2], radius=1.0),
+            Exit([10, 5], radius=1.0),
+            Exit([15, 8], radius=1.0),
+        ]
         assert agent.nearest_exit(exits) is exits[1]
 
     def test_nearest_exit_throws_exception_on_empty_list(self) -> None:
@@ -91,7 +90,9 @@ class TestAgent:
         agent = Agent([0, 0])
         close = Agent([1, 0])
         far = Agent([3, 0])
-        assert np.linalg.norm(agent.repulsion_from_agent(close)) > np.linalg.norm(agent.repulsion_from_agent(far))
+        assert np.linalg.norm(
+            agent.repulsion_from_agent(close)
+        ) > np.linalg.norm(agent.repulsion_from_agent(far))
 
     # repulsion_from_obstacle
     def test_repulsion_from_obstacle_points_away(self) -> None:
@@ -109,7 +110,9 @@ class TestAgent:
         obstacle = Obstacle([0, 0], radius=1.0)
         close = Agent([1.5, 0])
         far = Agent([2.5, 0])
-        assert np.linalg.norm(close.repulsion_from_obstacle(obstacle)) > np.linalg.norm(far.repulsion_from_obstacle(obstacle))
+        assert np.linalg.norm(
+            close.repulsion_from_obstacle(obstacle)
+        ) > np.linalg.norm(far.repulsion_from_obstacle(obstacle))
 
     # repulsion_from_wall
     def test_repulsion_from_left_wall_pushes_right(self) -> None:

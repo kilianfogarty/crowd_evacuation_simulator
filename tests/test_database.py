@@ -1,10 +1,10 @@
-import csv
 import os
 import tempfile
+
 from crowd_evacuation_simulator import Database
 
+
 class TestDatabase:
-    
     # init
     def test_database_initialization_creates_connection(self) -> None:
         with tempfile.NamedTemporaryFile(suffix=".db", delete=False) as f:
@@ -23,7 +23,9 @@ class TestDatabase:
         try:
             db = Database(path)
             cursor = db.connection.cursor()
-            cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='evacuation_runs'")
+            cursor.execute(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name='evacuation_runs'"
+            )
             assert cursor.fetchone() is not None
         finally:
             if db is not None:
@@ -52,7 +54,9 @@ class TestDatabase:
             db = Database(path)
             db.write_run(10, 0, 20.0, 20.0, 1, 22.1, True)
             cursor = db.connection.cursor()
-            cursor.execute("SELECT num_agents, num_obstacles, seed, evacuation_time, all_evacuated FROM evacuation_runs")
+            cursor.execute(
+                "SELECT num_agents, num_obstacles, seed, evacuation_time, all_evacuated FROM evacuation_runs"
+            )
             row = cursor.fetchone()
             assert row[0] == 10
             assert row[1] == 0
@@ -87,7 +91,9 @@ class TestDatabase:
             db = Database(path)
             db.write_run(100, 5, 20.0, 20.0, 2, None, False)
             cursor = db.connection.cursor()
-            cursor.execute("SELECT evacuation_time, all_evacuated FROM evacuation_runs")
+            cursor.execute(
+                "SELECT evacuation_time, all_evacuated FROM evacuation_runs"
+            )
             row = cursor.fetchone()
             assert row[0] is None
             assert row[1] == 0

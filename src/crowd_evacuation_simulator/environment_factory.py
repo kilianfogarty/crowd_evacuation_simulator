@@ -1,11 +1,14 @@
 from __future__ import annotations
+
 import numpy as np
+
 from .agent import Agent
-from .exit import Exit
 from .environment import Environment
+from .exit import Exit
 from .obstacle import Obstacle
 
 MARGIN = 0.1
+
 
 class EnvironmentFactory:
     """Constructs populated environments for simulations."""
@@ -16,10 +19,10 @@ class EnvironmentFactory:
         height: float,
         num_agents: int,
         num_obstacles: int,
-        seed: int 
+        seed: int,
     ) -> Environment:
         """Build and populate an environment with provided agents, obstacles, and exits.
-    
+
         Args:
             width (float): Room width in simulation units.
             height (float): Room height in simulation units.
