@@ -9,9 +9,9 @@ MARGIN = 0.1
 
 class EnvironmentFactory:
     """Constructs populated environments for simulations."""
-    
+
+    @staticmethod
     def build_environment(
-        self,
         width: float,
         height: float,
         num_agents: int,
