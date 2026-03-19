@@ -41,6 +41,7 @@ class EnvironmentFactory:
         Returns:
             Environment: A populated environment ready to simulate.
         """
+
         rng: np.random.Generator = np.random.default_rng(seed)
         env: Environment = Environment(width, height)
 
