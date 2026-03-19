@@ -39,19 +39,7 @@ directory as the executable.
 | `--max-steps` | 2000 | Steps before stopping |
 
 ## Exporting results to CSV
-After running simulations, `results/simulation.db` contains all your data.
-To export it to a CSV you can open in Excel or any spreadsheet tool:
-
-**Option 1 — from the terminal (Python required):**
-```bash
-python -c "
-from crowd_evacuation_simulator import Database
-db = Database('results/simulation.db')
-db.export_csv('results/results.csv')
-db.close()
-print('Exported to results/results.csv')
-"
-```
+After running simulations, `results/simulation.db` and `results/results.csv` contains all your data.
 
 ## For Python users
 ```bash
