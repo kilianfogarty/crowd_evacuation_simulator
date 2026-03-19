@@ -4,8 +4,8 @@ Evacuation simulator project inspired by SoftSwarm labs. Monitors the time it ta
 # ToDo:
 - Make it so that obstacles are generated first, agents cannot be randomly generated inside an obstacle or existing agent in the first place. Use a set to list obstacle and other agent positions for O(1) lookup?
 - Multiple exits
-- C extension or different algorithm so that the simulation.step() function runs quicker?
-- Use conftest for fixtures.
+- SciPy KDTree?
+- Continue implementing fixtures.
 - Experiment.py file that runs multiple simulations with random variables.
 - Update Readme
-- Allow user to manually select location and size of obstacles and exits
+- Allow user to select location of the single exit
