@@ -2,13 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Generator
-
 import os
 import tempfile
+from collections.abc import Generator
 
 import pytest
-
 from crowd_evacuation_simulator import (
     Agent,
     Database,
@@ -17,7 +15,6 @@ from crowd_evacuation_simulator import (
     Simulation,
 )
 from crowd_evacuation_simulator.environment_factory import EnvironmentFactory
-
 
 # environment fixtures
 

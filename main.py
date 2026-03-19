@@ -42,9 +42,7 @@ def parse_args() -> argparse.Namespace:
         default=20.0,
         help="Room height in simulation units (default: 20)",
     )
-    parser.add_argument(
-        "--seed", type=int, default=0, help="Random seed (default: 0)"
-    )
+    parser.add_argument("--seed", type=int, default=0, help="Random seed (default: 0)")
     parser.add_argument(
         "--dt",
         type=float,

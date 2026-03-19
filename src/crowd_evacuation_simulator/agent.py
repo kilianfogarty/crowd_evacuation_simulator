@@ -73,9 +73,7 @@ class Agent:
         """
         if not exits:
             raise ValueError("No exits in provided list from environment")
-        distances = [
-            np.linalg.norm(self.position - exit.position) for exit in exits
-        ]
+        distances = [np.linalg.norm(self.position - exit.position) for exit in exits]
         return exits[int(np.argmin(distances))]
 
     def repulsion_from_agent(
@@ -98,9 +96,7 @@ class Agent:
         distance: float = float(np.linalg.norm(diff))
 
         if np.allclose(distance, 0):
-            angle: float = np.random.uniform(
-                0, 2 * np.pi
-            )  # angle can be from 0 -> 2pi
+            angle: float = np.random.uniform(0, 2 * np.pi)  # angle can be from 0 -> 2pi
             return np.array([np.cos(angle), np.sin(angle)])
 
         direction: np.ndarray = diff / distance
@@ -128,9 +124,7 @@ class Agent:
         distance = np.linalg.norm(diff)
 
         if np.allclose(distance, 0):
-            angle: float = np.random.uniform(
-                0, 2 * np.pi
-            )  # angle can be from 0 -> 2pi
+            angle: float = np.random.uniform(0, 2 * np.pi)  # angle can be from 0 -> 2pi
             return np.array([np.cos(angle), np.sin(angle)])
 
         if distance > obstacle.radius + 2.0:

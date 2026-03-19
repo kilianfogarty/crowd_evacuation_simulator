@@ -91,9 +91,7 @@ class TestDatabase:
             db = Database(path)
             db.write_run(100, 5, 20.0, 20.0, 2, None, False)
             cursor = db.connection.cursor()
-            cursor.execute(
-                "SELECT evacuation_time, all_evacuated FROM evacuation_runs"
-            )
+            cursor.execute("SELECT evacuation_time, all_evacuated FROM evacuation_runs")
             row = cursor.fetchone()
             assert row[0] is None
             assert row[1] == 0
