@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Generator
+
 import os
 import tempfile
 
@@ -72,7 +74,7 @@ def basic_simulation(basic_env: Environment) -> Simulation:
 
 
 @pytest.fixture
-def temp_db() -> Database:
+def temp_db() -> Generator[Database, None, None]:
     """A temporary database that always closes before the temp directory is deleted.
 
     Uses yield so teardown runs even if the test raises an exception —
