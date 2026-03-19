@@ -9,4 +9,3 @@ Evacuation simulator project inspired by SoftSwarm labs. Monitors the time it ta
 - Experiment.py file that runs multiple simulations with random variables.
 - Update Readme
 - Allow user to manually select location and size of obstacles and exits
-- Replace magic numbers with constants
