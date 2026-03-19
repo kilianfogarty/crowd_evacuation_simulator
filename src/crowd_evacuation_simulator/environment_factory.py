@@ -8,6 +8,9 @@ from .exit import Exit
 from .obstacle import Obstacle
 
 MARGIN = 0.1
+MIN_DISTANCE_FROM_ENTITITY: float = 1.0
+MAX_PLACEMENT_ATTEMPTS: int = 50
+CELL_SIZE: float = 1.0
 DEFAULT_OBSTACLE_RADIUS: float = 1.0
 
 
@@ -42,12 +45,15 @@ class EnvironmentFactory:
         x_min, y_min = width * MARGIN, height * MARGIN
         x_max, y_max = width * (1 - MARGIN), height * (1 - MARGIN)
 
-        for _ in range(num_agents):
-            position = rng.uniform([x_min, y_min], [x_max, y_max])
-            env.add_agent(Agent(position))
+        # NOTE: Cannot use sets to check for membership since floats do not match exactly.
+        # NOTE: Overlap is handled on the first step of simulation by a randomized escape direction vector.
 
         for _ in range(num_obstacles):
             position = rng.uniform([x_min, y_min], [x_max, y_max])
             env.add_obstacle(Obstacle(position, DEFAULT_OBSTACLE_RADIUS))
+
+        for _ in range(num_agents):
+            position = rng.uniform([x_min, y_min], [x_max, y_max])
+            env.add_agent(Agent(position))
 
         return env

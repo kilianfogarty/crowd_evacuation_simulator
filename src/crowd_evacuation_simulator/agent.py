@@ -58,6 +58,7 @@ class Agent:
         direction = force / norm
         self.position += direction * self.speed * dt
 
+    # Overkill for the current single exit implementation.
     def nearest_exit(self, exits: list[Exit]) -> Exit:
         """Return the closest exit based on Euclidean distance.
 
