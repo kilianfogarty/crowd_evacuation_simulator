@@ -44,8 +44,8 @@ class EnvironmentFactory:
         rng: np.random.Generator = np.random.default_rng(seed)
         env: Environment = Environment(width, height)
 
-        x: float = exit_x if exit_x is not None else width - 2.0
-        y: float = exit_y if exit_y is not None else height / 2.0
+        x: float = exit_x if exit_x is not None else width / 2.0
+        y: float = exit_y if exit_y is not None else height - (height - 2.0)
 
         env.add_exit(Exit([x, y], exit_radius))
 
