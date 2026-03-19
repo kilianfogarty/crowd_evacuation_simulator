@@ -215,8 +215,11 @@ def main() -> None:
                         f"-> incomplete ({num_evacuated}/{num_agents} evacuated)"
                     )
 
+    csv_path = "results/results.csv"
+    db.export_csv(csv_path)
     db.close()
     print("Finished. Result logged to results/simulation.db")
+    print(f"CSV exported to {csv_path}")
 
 
 if __name__ == "__main__":
