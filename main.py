@@ -57,6 +57,25 @@ def parse_args() -> argparse.Namespace:
         default=2000,
         help="Max timesteps before quitting (default: 2000)",
     )
+    parser.add_argument(
+        "--exit-x",
+        type=float,
+        default=None,
+        help="Exit x position (default: right wall centre)",
+    )
+    parser.add_argument(
+        "--exit-y",
+        type=float,
+        default=None,
+        help="Exit y position (default: right wall centre)",
+    )
+    parser.add_argument(
+        "--exit-radius",
+        type=float,
+        default=None,
+        help="Exit radius (default: 1.0)",
+    )
+
     return parser.parse_args()
 
 

@@ -12,6 +12,7 @@ MIN_DISTANCE_FROM_ENTITITY: float = 1.0
 MAX_PLACEMENT_ATTEMPTS: int = 50
 CELL_SIZE: float = 1.0
 DEFAULT_OBSTACLE_RADIUS: float = 1.0
+DEFAULT_EXIT_RADIUS: float = 1.0
 
 
 class EnvironmentFactory:
@@ -24,6 +25,9 @@ class EnvironmentFactory:
         num_agents: int,
         num_obstacles: int,
         seed: int,
+        exit_x: float | None = None,
+        exit_y: float | None = None,
+        exit_radius: float = DEFAULT_EXIT_RADIUS,
     ) -> Environment:
         """Build and populate an environment with provided agents, obstacles, and exits.
 
@@ -40,7 +44,10 @@ class EnvironmentFactory:
         rng: np.random.Generator = np.random.default_rng(seed)
         env: Environment = Environment(width, height)
 
-        env.add_exit(Exit([width - 2.0, height / 2.0], radius=1.0))
+        x: float = exit_x if exit_x is not None else width - 2.0
+        y: float = exit_y if exit_y is not None else height / 2.0
+
+        env.add_exit(Exit([x, y], exit_radius))
 
         x_min, y_min = width * MARGIN, height * MARGIN
         x_max, y_max = width * (1 - MARGIN), height * (1 - MARGIN)
