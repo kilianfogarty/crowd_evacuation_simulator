@@ -8,12 +8,20 @@ if TYPE_CHECKING:
     from .exit import Exit
     from .obstacle import Obstacle
 
+DEFAULT_AGENT_SPEED: float = 1.5
+DEFAULT_REPULSION_STRENGTH_OTHER_AGENT: float = 1.5
+DEFAULT_REPULSION_STRENGTH_OBSTACLE: float = 3.0
+DEFAULT_REPULSION_STRENGTH_WALL: float = 5.0
+DEFAULT_WALL_THRESHOLD: float = 1.5
+
 
 class Agent:
     """Single pedestrian in the crowd evacuation simulation."""
 
     def __init__(
-        self, position: np.ndarray | list[float], speed: float = 1.5
+        self,
+        position: np.ndarray | list[float],
+        speed: float = DEFAULT_AGENT_SPEED,
     ) -> None:
         self.position: np.ndarray = np.array(position, dtype=float)
         self.speed: float = speed
@@ -70,7 +78,9 @@ class Agent:
         return exits[int(np.argmin(distances))]
 
     def repulsion_from_agent(
-        self, other: Agent, strength: float = 1.5
+        self,
+        other: Agent,
+        strength: float = DEFAULT_REPULSION_STRENGTH_OTHER_AGENT,
     ) -> np.ndarray:
         """Return repulsion force vector away from another agent.
 
@@ -98,7 +108,9 @@ class Agent:
         return (strength * direction) / distance
 
     def repulsion_from_obstacle(
-        self, obstacle: Obstacle, strength: float = 1.5
+        self,
+        obstacle: Obstacle,
+        strength: float = DEFAULT_REPULSION_STRENGTH_OBSTACLE,
     ) -> np.ndarray:
         """Return repulsion force vector away from an obstacle.
 
@@ -131,8 +143,8 @@ class Agent:
         self,
         width: float,
         height: float,
-        strength: float = 2.0,
-        threshold: float = 1.0,
+        strength: float = DEFAULT_REPULSION_STRENGTH_WALL,
+        threshold: float = DEFAULT_WALL_THRESHOLD,
     ) -> np.ndarray:
         """Return repulsion force pushing the agent away from room boundaries.
 

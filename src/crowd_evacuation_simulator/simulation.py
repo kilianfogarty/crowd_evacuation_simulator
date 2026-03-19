@@ -6,7 +6,9 @@ from .agent import Agent
 from .environment import Environment
 from .exit import Exit
 
-INTERACTION_RADIUS = 5.0
+DEFAULT_TIMESTEP: float = 0.1
+DEFAULT_MAX_STEPS: int = 2000
+INTERACTION_RADIUS: float = 5.0
 
 
 class Simulation:
@@ -19,7 +21,10 @@ class Simulation:
     """
 
     def __init__(
-        self, environment: Environment, dt: float = 0.1, max_steps: int = 2000
+        self,
+        environment: Environment,
+        dt: float = DEFAULT_TIMESTEP,
+        max_steps: int = DEFAULT_MAX_STEPS,
     ) -> None:
         self.environment: Environment = environment
         self.dt: float = dt

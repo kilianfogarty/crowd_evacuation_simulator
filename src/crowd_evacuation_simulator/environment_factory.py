@@ -8,6 +8,7 @@ from .exit import Exit
 from .obstacle import Obstacle
 
 MARGIN = 0.1
+DEFAULT_OBSTACLE_RADIUS: float = 1.0
 
 
 class EnvironmentFactory:
@@ -47,6 +48,6 @@ class EnvironmentFactory:
 
         for _ in range(num_obstacles):
             position = rng.uniform([x_min, y_min], [x_max, y_max])
-            env.add_obstacle(Obstacle(position, radius=0.8))
+            env.add_obstacle(Obstacle(position, DEFAULT_OBSTACLE_RADIUS))
 
         return env
