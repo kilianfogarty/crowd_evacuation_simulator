@@ -1,40 +1,30 @@
 # Crowd Evacuation Simulator
+Simulates crowd evacuation in a 2D room. Agents navigate toward an exit
+while avoiding other agents, obstacles, and walls. Results are logged to a
+SQLite database after every run.
 
-Simulates crowd evacuation in a 2D room. Agents navigate toward an exit 
-while avoiding other agents, obstacles, and walls. Results are logged to a 
-SQLite database for analysis.
-
-
-## Installation
-
-Requires Python 3.11+.
-```bash
-git clone https://github.com/kilianfogarty/crowd_evacuation_simulator.git
-cd crowd_evacuation_simulator
-pip install -e .
-```
-
----
+## Download
+No Python required. Download `simulate.exe` from the
+[latest release](https://github.com/kilianfogarty/crowd_evacuation_simulator/releases)
+and run it from a terminal. WINDOWS ONLY.
 
 ## Usage
-```bash
-# run with defaults — 1 to 30 agents, no obstacles, 1 seed
-python main.py
+Open PowerShell or Command Prompt in the folder where you saved `simulate.exe`:
+```powershell
+# run with defaults
+.\simulate.exe
 
-# vary agents and obstacles across multiple seeds
-python main.py --max-agents 50 --max-obstacles 3 --seeds 5
+# custom simulation
+.\simulate.exe --max-agents 30 --exit-x 10 --exit-y 5 --exit-radius 2.0
 
-# custom exit position
-python main.py --max-agents 30 --exit-x 10 --exit-y 5 --exit-radius 2.0
-
-# larger room
-python main.py --max-agents 100 --width 40 --height 40 --seeds 3
+# see all options
+.\simulate.exe --help
 ```
 
----
+Results are saved automatically to a `results/` folder in the same
+directory as the executable.
 
 ## Options
-
 | Flag | Default | Description |
 |---|---|---|
 | `--max-agents` | 30 | Simulate 1 up to this many agents |
@@ -48,23 +38,30 @@ python main.py --max-agents 100 --width 40 --height 40 --seeds 3
 | `--dt` | 0.1 | Timestep in seconds |
 | `--max-steps` | 2000 | Steps before stopping |
 
----
+## Exporting results to CSV
+After running simulations, `results/simulation.db` contains all your data.
+To export it to a CSV you can open in Excel or any spreadsheet tool:
 
-## Results
-
-Every run is logged to `results/simulation.db`. Export to CSV:
-```python
+**Option 1 — from the terminal (Python required):**
+```bash
+python -c "
 from crowd_evacuation_simulator import Database
-
-db = Database()
-db.export_csv("results/results.csv")
+db = Database('results/simulation.db')
+db.export_csv('results/results.csv')
 db.close()
+print('Exported to results/results.csv')
+"
 ```
 
----
+## For Python users
+```bash
+git clone https://github.com/kilianfogarty/crowd_evacuation_simulator.git
+cd crowd_evacuation_simulator
+pip install -e .
+python main.py --max-agents 30 --seeds 5
+```
 
-## Run tests
+Run tests:
 ```bash
 pytest
-pytest --cov=crowd_evacuation_simulator --cov-report=term-missing
 ```
