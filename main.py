@@ -143,7 +143,7 @@ def main() -> None:
     args = parse_args()
 
     agent_counts: range = range(1, args.max_agents + 1)
-    obstacle_counts: range = range(1, args.max_obstacles + 1)
+    obstacle_counts: range = range(0, args.max_obstacles + 1)
     seeds: range = range(args.seeds)
 
     non_zeros = [
@@ -155,7 +155,7 @@ def main() -> None:
         total_runs *= num
 
     print(
-        f"Running {total_runs} simulations ->"
+        f"Running {total_runs} simulations -> "
         f"agents 1–{args.max_agents}, "
         f"obstacles 0–{args.max_obstacles}, "
         f"{args.seeds} seed(s) each"
