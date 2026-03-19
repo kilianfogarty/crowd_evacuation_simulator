@@ -1,24 +1,28 @@
 repos:
+
+  - repo: https://github.com/psf/black
+    rev: 26.3.1
+    hooks:
+      - id: black
+
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.4.4
     hooks:
       - id: ruff
         args: [--fix]
-      - id: ruff-format
 
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.10.0
     hooks:
       - id: mypy
-        args: [--ignore-missing-imports]
         additional_dependencies: [numpy]
 
   - repo: local
     hooks:
       - id: pytest
         name: pytest
-        entry: .venv/Scripts/python.exe -m pytest
+        entry: python -m pytest
         language: system
         types: [python]
         pass_filenames: false
-        args: [--tb=short, -q, --cov=crowd_evacuation_simulator, --cov-fail-under=80]
+        args: [--tb=short, -q, --cov=crowd_evacuation_simulator, --cov-fail-under=85]

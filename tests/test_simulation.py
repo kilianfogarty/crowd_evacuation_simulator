@@ -1,5 +1,4 @@
 import numpy as np
-
 from crowd_evacuation_simulator import Agent, Environment, Exit, Simulation
 
 
@@ -63,7 +62,7 @@ class TestSimulation:
         env.add_exit(Exit([9, 9], radius=0.5))
         env.add_agent(Agent([0, 0], speed=0.001))
         sim = Simulation(env, max_steps=5)
-        for i in range(5):
+        for _ in range(5):
             sim.step()
         assert sim.finished is True
 
@@ -134,7 +133,7 @@ class TestSimulation:
         positions_before = [agent.position.copy() for agent in agents]
         sim = Simulation(env, dt=1.0)
         sim.step()
-        for agent, before in zip(agents, positions_before):
+        for agent, before in zip(agents, positions_before, strict=False):
             assert not np.allclose(agent.position, before)
 
     # run

@@ -1,5 +1,4 @@
 import numpy as np
-
 from crowd_evacuation_simulator.environment_factory import (
     Environment,
     EnvironmentFactory,
@@ -48,7 +47,7 @@ class TestEnvironmentFactory:
         env_b = EnvironmentFactory.build_environment(
             width=20, height=20, num_agents=10, num_obstacles=0, seed=42
         )
-        for agent_a, agent_b in zip(env_a.agents, env_b.agents):
+        for agent_a, agent_b in zip(env_a.agents, env_b.agents, strict=False):
             assert np.allclose(agent_a.position, agent_b.position)
 
     def test_different_seeds_produce_different_positions(self) -> None:
@@ -60,6 +59,6 @@ class TestEnvironmentFactory:
         )
         positions_match = all(
             np.allclose(a.position, b.position)
-            for a, b in zip(env_a.agents, env_b.agents)
+            for a, b in zip(env_a.agents, env_b.agents, strict=False)
         )
         assert not positions_match

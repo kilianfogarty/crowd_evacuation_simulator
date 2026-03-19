@@ -10,7 +10,6 @@ import os
 import tempfile
 
 import numpy as np
-
 from crowd_evacuation_simulator import (
     Database,
     Environment,
@@ -41,9 +40,7 @@ class TestIntegration:
                 all_evacuated=sim.all_evacuated,
             )
             cursor = db.connection.cursor()
-            cursor.execute(
-                "SELECT evacuation_time, all_evacuated FROM evacuation_runs"
-            )
+            cursor.execute("SELECT evacuation_time, all_evacuated FROM evacuation_runs")
             row = cursor.fetchone()
             db.close()
 

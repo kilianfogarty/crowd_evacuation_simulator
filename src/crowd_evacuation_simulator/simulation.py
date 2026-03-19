@@ -52,9 +52,7 @@ class Simulation:
         """
 
         env: Environment = self.environment
-        active: list[Agent] = [
-            agent for agent in env.agents if not agent.evacuated
-        ]
+        active: list[Agent] = [agent for agent in env.agents if not agent.evacuated]
 
         for agent in active:
             # Exit attraction
