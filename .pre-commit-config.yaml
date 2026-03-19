@@ -21,8 +21,8 @@ repos:
     hooks:
       - id: pytest
         name: pytest
-        entry: python -m pytest
+        entry: pytest
         language: system
         types: [python]
         pass_filenames: false
-        args: [--tb=short, -q, --cov=crowd_evacuation_simulator, --cov-fail-under=85]
+        args: [--tb=short, -q, --color=yes, --cov=crowd_evacuation_simulator, --cov-report=term-missing, --cov-fail-under=85]
