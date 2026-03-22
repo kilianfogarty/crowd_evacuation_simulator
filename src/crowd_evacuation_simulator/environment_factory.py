@@ -48,6 +48,11 @@ class EnvironmentFactory:
         x: float = exit_x if exit_x is not None else width / 2.0
         y: float = exit_y if exit_y is not None else height - (height - 2.0)
 
+        if not (0 <= x <= width):
+            raise ValueError(f"Exit x position {x} is outside room width [0, {width}]")
+        if not (0 <= y <= height):
+            raise ValueError(f"Exit y position {y} is outside room width [0, {height}]")
+
         env.add_exit(Exit([x, y], exit_radius))
 
         x_min, y_min = width * MARGIN, height * MARGIN
